@@ -2,10 +2,17 @@
 
 namespace app\controllers;
 
-class Main {
+class Main extends App {
+
+    //public $layout = 'main';
 
     public function indexAction() {
-        echo 'Main::index';
+        //$this->layout = false;
+        /*$this->layout = 'main';
+        $this->view = 'test';*/
+        $testVar = "testValue";
+        $title = "Page title";
+        $this->set(compact('testVar', 'title'));
     }
 
 }

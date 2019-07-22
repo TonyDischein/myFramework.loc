@@ -9,6 +9,7 @@ define("WWW", __DIR__);
 define("CORE", dirname(__DIR__) . 'vendor/core');
 define("ROOT", dirname(__DIR__));
 define("APP", dirname(__DIR__) . '/app');
+define("LAYOUT", 'default');
 
 require '../vendor/libs/functions.php';
 
@@ -24,7 +25,5 @@ Router::add('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page', 'action' => 'v
 
 Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
-
-debug(Router::getRoutes());
 
 Router::dispatch($query);
