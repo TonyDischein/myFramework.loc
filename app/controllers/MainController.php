@@ -13,7 +13,12 @@ class MainController extends AppController {
         $posts = \R::findAll('posts');
         $menu = $this->menu;
         $title = "Page title";
-        $this->set(compact('title', 'posts', 'menu'));
+        $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
+        $meta = $this->meta;
+        $this->set(compact('title', 'posts', 'menu', 'meta'));
     }
 
+    public function testAction() {
+        $this->layout = 'test';
+    }
 }
