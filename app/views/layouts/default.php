@@ -13,13 +13,19 @@
         <![endif]-->
     </head>
     <body>
-        
-        <h1>Hello, world!</h1>
-        
-        <?=$content?>
+        <div class="container">
+            <ul class="nav nav-pills">
+                <?php foreach ($menu as $item):?>
+                    <li><a href="category/<?= $item['id'] ?>"><?= $item['category_name'] ?></a></li>
+                <?php endforeach;?>
+            </ul>
+            <h1>Hello, world!</h1>
 
-        <?= debug(vendor\core\Db::$countSql)?>
-        <?= debug(vendor\core\Db::$queries)?>
+            <?=$content?>
+
+            <?/*= debug(vendor\core\Db::$countSql)*/?><!--
+        --><?/*= debug(vendor\core\Db::$queries)*/?>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
     </body>

@@ -10,11 +10,10 @@ class MainController extends AppController {
 
     public function indexAction() {
         $model = new Main();
-        $posts = $model->findAll();
-        $post = $model->findOne(2);
-        debug($post);
+        $posts = \R::findAll('posts');
+        $menu = $this->menu;
         $title = "Page title";
-        $this->set(compact('title', 'posts'));
+        $this->set(compact('title', 'posts', 'menu'));
     }
 
 }
