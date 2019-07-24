@@ -10,16 +10,14 @@ class MainController extends AppController {
     //public $layout = 'main';
 
     public function indexAction() {
-        //App::$app->getList();
-        \R::fancyDebug(true);
         $model = new Main();
 
-        $posts = App::$app->cache->get('posts');
+/*        $posts = App::$app->cache->get('posts');
         if (!$posts) {
             $posts = \R::findAll('posts');
             App::$app->cache->set('posts', $posts);
-        }
-
+        }*/
+        $posts = \R::findAll('posts');
         $menu = $this->menu;
         $title = "Page title";
         $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
@@ -28,6 +26,13 @@ class MainController extends AppController {
     }
 
     public function testAction() {
-        $this->layout = 'test';
+        if ($this->isAjax()) {
+            $model = new Main();
+            $post = \R::findOne('posts', "id = {$_POST['id']}");
+            $this->loadView('_test', compact('post'));
+            die();
+        }
+        echo 222;
+        //$this->layout = 'test';
     }
 }
