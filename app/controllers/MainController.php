@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Main;
 use vendor\core\App;
+use vendor\core\base\View;
 
 class MainController extends AppController {
 
@@ -20,8 +21,10 @@ class MainController extends AppController {
         $posts = \R::findAll('posts');
         $menu = $this->menu;
         $title = "Page title";
-        $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
-        $meta = $this->meta;
+/*      $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
+        $meta = $this->meta;*/
+        View::setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
+
         $this->set(compact('title', 'posts', 'menu', 'meta'));
     }
 
