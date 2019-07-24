@@ -11,8 +11,15 @@ class MainController extends AppController {
 
     public function indexAction() {
         //App::$app->getList();
+        \R::fancyDebug(true);
         $model = new Main();
-        $posts = \R::findAll('posts');
+
+        $posts = App::$app->cache->get('posts');
+        if (!$posts) {
+            $posts = \R::findAll('posts');
+            App::$app->cache->set('posts', $posts);
+        }
+
         $menu = $this->menu;
         $title = "Page title";
         $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');

@@ -9,6 +9,7 @@ define("WWW", __DIR__);
 define("CORE", dirname(__DIR__) . 'vendor/core');
 define("ROOT", dirname(__DIR__));
 define("LIBS", dirname(__DIR__) . '/vendor/libs');
+define("CACHE", dirname(__DIR__) . '/tmp/cache');
 define("APP", dirname(__DIR__) . '/app');
 define("LAYOUT", 'default');
 
