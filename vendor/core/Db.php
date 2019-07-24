@@ -3,8 +3,10 @@
 namespace vendor\core;
 
 class Db {
+    use TSingleton;
+
     protected $pdo;
-    protected static $instance;
+    //protected static $instance;
 
     public static $countSql = 0;
     public static $queries = [];
@@ -14,6 +16,8 @@ class Db {
         require LIBS . '/rb.php';
         \R::setup($db['dsn'], $db['user'], $db['pass']);
         \R::freeze(true);
+
+
         /*\R::fancyDebug(true);*/
 /*        $option = [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
@@ -22,12 +26,12 @@ class Db {
         $this->pdo = new \PDO($db['dsn'], $db['user'], $db['pass'], $option);*/
     }
 
-    public static function instance() {
+/*    public static function instance() {
         if (self::$instance === null) {
             self::$instance = new self;
         }
         return self::$instance;
-    }
+    }*/
 
 /*    public function execute($sql, $params = []) {
         self::$countSql++;
