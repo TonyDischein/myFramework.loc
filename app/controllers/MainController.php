@@ -12,6 +12,7 @@ class MainController extends AppController {
 
     public function indexAction() {
         $model = new Main();
+        echo $test;
 
 /*        $posts = App::$app->cache->get('posts');
         if (!$posts) {

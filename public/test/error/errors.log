@@ -1,8 +1,0 @@
-[2019-07-25 10:12:15] Текст ошибки: Undefined variable: test | Файл: F:\OpenServer\domains\myFramework.loc\public\test\error\index.php | Строка 50 
-=================
-[2019-07-25 10:16:43] Текст ошибки: Undefined variable: test | Файл: F:\OpenServer\domains\myFramework.loc\public\test\error\index.php | Строка 52 
-=================
-[2019-07-25 10:16:43] Текст ошибки: Call to undefined function test() | Файл: F:\OpenServer\domains\myFramework.loc\public\test\error\index.php | Строка 53 
-=================
-[2019-07-25 10:16:52] Текст ошибки: ou, error | Файл: F:\OpenServer\domains\myFramework.loc\public\test\error\index.php | Строка 53 
-=================

@@ -1,6 +1,6 @@
 <?php
 
-define("DEBUG", 1);
+namespace vendor\core;
 
 class ErrorHandler {
     public function __construct() {
@@ -16,7 +16,7 @@ class ErrorHandler {
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline) {
-        error_log("[" . date('Y-m-d H:i:s') . "] Текст ошибки: {$errstr} | Файл: {$errfile} | Строка {$errline} \n=================\n", 3, __DIR__ . "/errors.log");
+        $this->logErrors($errstr, $errfile, $errline);
         $this->displayError($errno, $errstr, $errfile, $errline);
         return true;
     }
@@ -24,7 +24,7 @@ class ErrorHandler {
     public function fatalErrorHandler() {
         $error = error_get_last();
         if (!empty($error) && $error['type'] & ( E_ERROR | E_PARSE | E_COMPILE_ERROR | E_CORE_ERROR)) {
-            error_log("[" . date('Y-m-d H:i:s') . "] Текст ошибки: {$error['message']} | Файл: {$error['file']} | Строка {$error['line']} \n=================\n", 3, __DIR__ . "/errors.log");
+            $this->logErrors($error['message'], $error['file'], $error['line']);
             ob_get_clean();
             $this->displayError($error['type'], $error['message'],$error['file'], $error['line']);
         } else {
@@ -32,23 +32,26 @@ class ErrorHandler {
         }
     }
 
-    public function exceptionHandler(Exception $e) {
-        error_log("[" . date('Y-m-d H:i:s') . "] Текст ошибки: {$e->getMessage()} | Файл: {$e->getFile()} | Строка {$e->getLine()} \n=================\n", 3, __DIR__ . "/errors.log");
+    public function exceptionHandler($e) {
+        $this->logErrors($e->getMessage(), $e->getFile(), $e->getLine());
         $this->displayError('Исключение', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getCode());
     }
 
+    protected function logErrors($message = '', $file = '', $line = '') {
+        error_log("[" . date('Y-m-d H:i:s') . "] Текст ошибки: {$message} | Файл: {$file} | Строка {$line} \n=================\n", 3, ROOT . '/tmp/errors.log');
+    }
+
     protected function displayError($errno, $errstr, $errfile, $errline, $response = 500) {
-        http_response_code(500);
-        if (DEBUG) {
-            require 'views/dev.php';
-        } else {
-            require "views/prod.php";
+        http_response_code($response);
+        if ($response == 404) {
+            require WWW . '/errors/404.html';
+            die();
         }
+        if (DEBUG) {
+            require WWW . '/errors/dev.php';
+        } else {
+            require WWW . "/errors/prod.php";
+        }
+        die;
     }
 }
-
-new ErrorHandler();
-
-
-    throw new Exception("ou, error", 404);
-
