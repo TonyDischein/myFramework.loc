@@ -1,6 +1,15 @@
 <div class="container">
     <div id="answer"></div>
     <button class="btn btn-default" id="send">Кнопка</button>
+    <?php new \vendor\widgets\menu\Menu([
+        //'tpl' => WWW . '/menu/my_menu.php',
+        'tpl' => WWW . '/menu/select.php',
+        'container' => 'select',
+        'class' => 'my_menu',
+        'table' => 'categories',
+        'cache' => 36,
+        'cacheKey' => 'vendor_menu',
+    ]); ?>
     <?php if (!empty($posts)):?>
         <?php foreach ($posts as $post):?>
             <div class="panel panel-default">
