@@ -2,24 +2,49 @@
 
 namespace vendor\widgets\menu;
 
+use vendor\libs\Cache;
+
 class Menu {
     protected $data;
     protected $tree;
     protected $menuHtml;
     protected $tpl;
-    protected $container;
-    protected $table;
-    protected $cache;
+    protected $container = 'ul';
+    protected $class = 'menu';
+    protected $table = 'categories';
+    protected $cache = 3600;
+    protected $cacheKey;
 
-    public function __construct() {
+    public function __construct($options = []) {
+        $this->tpl =  __DIR__ . '/menu_tpl/menu.php';
+        $this->getOptions($options);
         $this->run();
     }
 
+    protected function getOptions($options) {
+        foreach ($options as $k => $v) {
+            if (property_exists($this, $k)) {
+                $this->$k = $v;
+            }
+        }
+    }
+
+    protected function output() {
+        echo "<{$this->container} class='{$this->class}'>";
+            echo $this->menuHtml;
+        echo "</{$this->container}>";
+    }
+
     protected function run() {
-        $this->data = \R::getAssoc("SELECT * FROM categories");
-        $this->tree = $this->getTree();
-        echo $this->menuHtml = $this->getMenuHtml($this->tree);
-        //debug($this->tree);
+        $cache = new Cache();
+        $this->menuHtml = $cache->get($this->cacheKey);
+        if (!$this->menuHtml) {
+            $this->data = \R::getAssoc("SELECT * FROM {$this->table}");
+            $this->tree = $this->getTree();
+            $this->menuHtml = $this->getMenuHtml($this->tree);
+            $cache->set($this->cacheKey, $this->menuHtml, $this->cache);
+        }
+        $this->output();
     }
 
     protected function getTree() {
@@ -46,7 +71,7 @@ class Menu {
 
     protected function catToTemplate($category, $tab, $id) {
         ob_start();
-        require __DIR__ . '/menu_tpl/menu.php';
+        require $this->tpl;
         return ob_get_clean();
     }
 }
