@@ -1,6 +1,8 @@
 {
     "name": "my-framework/my-framework",
-    "require": {},
+    "require": {
+        "vlucas/valitron": "^1.4"
+    },
     "autoload": {
         "psr-4": {
             "myFramework\\": "vendor/myFramework",

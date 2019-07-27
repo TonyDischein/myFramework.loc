@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'myFramework\\' => array($vendorDir . '/myFramework'),
     'app\\' => array($baseDir . '/app'),
+    'Valitron\\' => array($vendorDir . '/vlucas/valitron/src/Valitron'),
 );
