@@ -1,8 +1,8 @@
 <?php
 
-namespace vendor\core\base;
+namespace myFramework\core\base;
 
-use vendor\core\Db;
+use myFramework\core\Db;
 
 abstract class Model {
     protected $pdo;

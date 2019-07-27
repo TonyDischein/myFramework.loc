@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\core;
+namespace myFramework\core;
 
 class App {
     public static $app;

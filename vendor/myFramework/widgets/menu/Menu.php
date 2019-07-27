@@ -1,8 +1,8 @@
 <?php
 
-namespace vendor\widgets\menu;
+namespace myFramework\widgets\menu;
 
-use vendor\libs\Cache;
+use myFramework\libs\Cache;
 
 class Menu {
     protected $data;
@@ -16,7 +16,7 @@ class Menu {
     protected $cacheKey;
 
     public function __construct($options = []) {
-        $this->tpl =  __DIR__ . '/menu_tpl/menu.php';
+        $this->tpl = __DIR__ . '/menu_tpl/menu.php';
         $this->getOptions($options);
         $this->run();
     }
