@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vendor\core;
+namespace myFramework\core;
 
 
 trait TSingleton {

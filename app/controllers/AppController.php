@@ -5,7 +5,7 @@ namespace app\controllers;
 
 use app\models\Main;
 
-class AppController extends \vendor\core\base\Controller {
+class AppController extends \myFramework\core\base\Controller {
 
     public $menu;
     public $meta = [];
