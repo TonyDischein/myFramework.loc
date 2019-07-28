@@ -42,6 +42,9 @@
                     <?=$_SESSION['saccess']; unset($_SESSION['saccess']);?>
                 </div>
             <?php endif; ?>
+
+            <?php debug($_SESSION);?>
+
             <?=$content?>
 
             <?/*= debug(vendor\core\Db::$countSql)*/?><!--
