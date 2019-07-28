@@ -14,17 +14,36 @@
     </head>
     <body>
         <div class="container">
-            <?php if (!empty($menu)):?>
             <ul class="nav nav-pills">
                 <li><a href="/">Home</a></li>
                 <li><a href="/page/about">About</a></li>
                 <li><a href="/admin">Admin</a></li>
+                <li><a href="/user/signup">Signup</a></li>
+                <li><a href="/user/login">Login</a></li>
+                <li><a href="/user/logout">Logout</a></li>
+            </ul>
+            <?php if (!empty($menu)):?>
+            <ul class="nav nav-pills">
                 <?php foreach ($menu as $item):?>
                     <li><a href="category/<?= $item['id'] ?>"><?= $item['category_name'] ?></a></li>
                 <?php endforeach;?>
             </ul>
             <?php endif;?>
-            <h1>Hello, world!</h1>
+            <!--<h1>Hello, world!</h1>-->
+
+            <?php if (isset($_SESSION['error'])):?>
+                <div class="alert alert-danger">
+                    <?=$_SESSION['error']; unset($_SESSION['error']);?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['saccess'])):?>
+                <div class="alert alert-success">
+                    <?=$_SESSION['saccess']; unset($_SESSION['saccess']);?>
+                </div>
+            <?php endif; ?>
+
+            <?php debug($_SESSION);?>
 
             <?=$content?>
 
