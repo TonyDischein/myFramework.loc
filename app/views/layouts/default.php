@@ -31,6 +31,17 @@
             <?php endif;?>
             <!--<h1>Hello, world!</h1>-->
 
+            <?php if (isset($_SESSION['error'])):?>
+                <div class="alert alert-danger">
+                    <?=$_SESSION['error']; unset($_SESSION['error']);?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['saccess'])):?>
+                <div class="alert alert-success">
+                    <?=$_SESSION['saccess']; unset($_SESSION['saccess']);?>
+                </div>
+            <?php endif; ?>
             <?=$content?>
 
             <?/*= debug(vendor\core\Db::$countSql)*/?><!--
