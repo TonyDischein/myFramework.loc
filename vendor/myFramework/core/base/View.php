@@ -103,4 +103,13 @@ class View {
         self::$meta['keywords'] = $keywords;
     }
 
+    public function getPart($file) {
+        $file = APP . "/views/{$file}.php";
+        if (is_file($file)) {
+            require_once $file;
+        } else {
+            throw new \Exception("<p>Не найден фаил <b>$file</b></p>", 404);
+        }
+    }
+
 }
