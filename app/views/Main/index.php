@@ -19,6 +19,12 @@
                 </div>
             </div>
         <?php endforeach;?>
+        <div class="text-center">
+            <p>Статей: <?=count('posts');?> из <?=$total;?></p>
+            <?php if ($pagination->countPages > 1):?>
+                <?=$pagination;?>
+            <?php endif;?>
+        </div>
     <?php endif;?>
 </div>
 <script src="/js/test.js"></script>
