@@ -24,18 +24,46 @@ class View {
         $this->view = $view;
     }
 
+    protected function conpressPage($buffer) {
+        $search = [
+            "/(\n)+/",
+            "/\r\n+/",
+            "/\n(\t)+/",
+            "/\n(\ )+/",
+            "/\>(\n)+</",
+            "/\>\r\n</",
+        ];
+        $replace = [
+            "\n",
+            "\n",
+            "\n",
+            "\n",
+            '><',
+            '><',
+        ];
+        return preg_replace($search, $replace, $buffer);
+    }
+
     public function render($vars) {
         $this->route['prefix'] = str_replace('\\', '/', $this->route['prefix']);
         if (is_array($vars)) extract($vars);
         $file_view = APP . "/views/{$this->route['prefix']}{$this->route['controller']}/{$this->view}.php";
+        //ob_start([$this, 'conpressPage']);
+        //OR
+        //ob_start( 'ob_gzhandler');
         ob_start();
-        if (is_file($file_view)) {
-            require $file_view;
-        } else {
-            //echo "<p>Не найден вид <b>$file_view</b></p>";
-            throw new \Exception("<p>Не найден вид <b>$file_view</b></p>", 404);
-        }
+        {
+            header("Content-Encoding: gzip");
+            if (is_file($file_view)) {
+                require $file_view;
+            } else {
+                //echo "<p>Не найден вид <b>$file_view</b></p>";
+                throw new \Exception("<p>Не найден вид <b>$file_view</b></p>", 404);
+            }
 
+            //$content = ob_get_contents();
+        }
+        //ob_clean();
         $content = ob_get_clean();
 
         if (false !== $this->layout) {
