@@ -12,7 +12,7 @@ define("ROOT", dirname(__DIR__));
 define("LIBS", dirname(__DIR__) . '/vendor/myFramework/libs');
 define("CACHE", dirname(__DIR__) . '/tmp/cache');
 define("APP", dirname(__DIR__) . '/app');
-define("LAYOUT", 'default');
+define("LAYOUT", 'blog');
 
 require '../vendor/myFramework/libs/functions.php';
 require  __DIR__ . '/../vendor/autoload.php';
