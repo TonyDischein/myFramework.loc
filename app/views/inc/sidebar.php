@@ -1,3 +1,5 @@
+<?php new \myFramework\widgets\language\Language(); ?>
+<br><br>
 <div class="recent">
     <h3>RECENT POSTS</h3>
     <ul>

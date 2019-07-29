@@ -53,7 +53,7 @@ class View {
         //ob_start( 'ob_gzhandler');
         ob_start();
         {
-            header("Content-Encoding: gzip");
+            //header("Content-Encoding: gzip");
             if (is_file($file_view)) {
                 require $file_view;
             } else {

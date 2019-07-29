@@ -4,6 +4,8 @@
 namespace app\controllers;
 
 use app\models\Main;
+use myFramework\core\App;
+use myFramework\widgets\language\Language;
 
 class AppController extends \myFramework\core\base\Controller {
 
@@ -18,6 +20,9 @@ class AppController extends \myFramework\core\base\Controller {
         }*/
         new Main();
         $this->menu = \R::findAll('category');
+        App::$app->setProperty('langs', Language::getLanguages());
+        App::$app->setProperty('lang', Language::getLanguage(App::$app->getProperty('langs')));
+        //debug(App::$app->getProperties());
     }
 
     protected function setMeta($title = '', $desc = '', $keywords = '') {

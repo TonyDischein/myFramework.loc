@@ -26,6 +26,7 @@ class MainController extends AppController {
             $posts = \R::findAll('posts');
             App::$app->cache->set('posts', $posts);
         }*/
+
         $posts = \R::findAll('posts', "LIMIT $start, $perpage");
         $menu = $this->menu;
         $title = "Page title";
