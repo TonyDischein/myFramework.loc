@@ -14,7 +14,8 @@ class MainController extends AppController {
     public function indexAction() {
         $model = new Main();
 
-        $total = \R::count('posts');
+        $lang = App::$app->getProperty('lang')['code'];
+        $total = \R::count('posts', 'lang_code =?', [$lang]);
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $perpage = 2;
 
@@ -27,7 +28,7 @@ class MainController extends AppController {
             App::$app->cache->set('posts', $posts);
         }*/
 
-        $posts = \R::findAll('posts', "LIMIT $start, $perpage");
+        $posts = \R::findAll('posts', " lang_code=? LIMIT $start, $perpage", [$lang]);
         $menu = $this->menu;
         $title = "Page title";
 /*      $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');

@@ -101,6 +101,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <p>Copyrights © 2015 Blog All rights reserved | Template by <a href="http://w3layouts.com/">W3layouts</a></p>
     </div>
 </div>
-
+<script src="/blog/js/main.js"></script>
 </body>
 </html>
